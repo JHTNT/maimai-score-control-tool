@@ -151,7 +151,7 @@ def main():
 
     # end timing
     end_time = time.time()
-    print(f"總耗時：{end_time - start_time}s")
+    print(f"總耗時：{end_time - start_time:.2f}s")
 
 
 if __name__ == "__main__":
