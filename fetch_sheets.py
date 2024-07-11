@@ -133,9 +133,9 @@ def main():
         except:
             pass
 
-    # write to csv
+    # write to csv (utf-8 with BOM)
     all_sheet_data.sort(key=lambda x: x["ID"])
-    with open("sheet_data.csv", "w", encoding="utf-8", newline="") as f:
+    with open("sheet_data.csv", "w", encoding="utf-8-sig", newline="") as f:
         fields = [
             "ID",
             "Title",
