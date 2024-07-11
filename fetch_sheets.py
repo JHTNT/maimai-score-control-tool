@@ -1,3 +1,4 @@
+import csv
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -137,16 +138,26 @@ def main():
 
     # write to csv
     all_sheet_data.sort(key=lambda x: x["ID"])
-    with open("sheet_data.csv", "w", encoding="utf-8") as f:
-        f.write(
-            "ID,Title,Category,Version,Type,Difficulty,Level,TAP,HOLD,SLIDE,TOUCH,BREAK,Magnitude\n"
-        )
+    with open("sheet_data.csv", "w", encoding="utf-8", newline="") as f:
+        fields = [
+            "ID",
+            "Title",
+            "Category",
+            "Version",
+            "Type",
+            "Difficulty",
+            "Level",
+            "TAP",
+            "HOLD",
+            "SLIDE",
+            "TOUCH",
+            "BREAK",
+            "Magnitude",  # 物量當量
+        ]
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
         for sheet in all_sheet_data:
-            f.write(
-                f"{sheet['ID']},{sheet['Title']},{sheet['Category']},{sheet['Version']},{sheet['Type']},"
-                f"{sheet['Difficulty']},{sheet['Level']},{sheet['TAP']},{sheet['HOLD']},{sheet['SLIDE']},"
-                f"{sheet['TOUCH']},{sheet['BREAK']},{sheet['Magnitude']}\n"
-            )
+            writer.writerow(sheet)
         f.close()
 
     # end timing
