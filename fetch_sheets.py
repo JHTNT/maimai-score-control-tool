@@ -18,7 +18,7 @@ all_sheet_data = []
 
 options = Options()
 # hide browser window
-# options.add_argument("--headless")
+options.add_argument("--headless")
 # only show fatal message in console
 # INFO = 0, WARNING = 1, LOG_ERROR = 2, LOG_FATAL = 3
 options.add_argument("--log-level=3")
