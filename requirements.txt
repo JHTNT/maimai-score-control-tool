@@ -2,3 +2,4 @@ requests
 bs4
 selenium >= 4.6.0
 tqdm
+python-dotenv
