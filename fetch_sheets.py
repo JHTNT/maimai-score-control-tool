@@ -135,6 +135,7 @@ def main():
 
     # write to csv (utf-8 with BOM)
     all_sheet_data.sort(key=lambda x: x["ID"])
+    count = 0
     with open("sheet_data.csv", "w", encoding="utf-8-sig", newline="") as f:
         fields = [
             "ID",
@@ -154,6 +155,8 @@ def main():
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
         for sheet in all_sheet_data:
+            count += 1
+            sheet["ID"] = count
             writer.writerow(sheet)
         f.close()
 
