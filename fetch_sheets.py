@@ -133,8 +133,15 @@ def main():
         except:
             pass
 
-    # write to csv (utf-8 with BOM)
     all_sheet_data.sort(key=lambda x: x["ID"])
+
+    # get versions
+    versions = set(all_sheet_data[i]["Version"] for i in range(len(all_sheet_data)))
+    with open("versions.txt", "w", encoding="utf-8") as f:
+        for version in versions:
+            f.write(f"{version}\n")
+
+    # write to csv (utf-8 with BOM)
     count = 0
     with open("sheet_data.csv", "w", encoding="utf-8-sig", newline="") as f:
         fields = [
