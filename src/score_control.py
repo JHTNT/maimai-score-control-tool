@@ -74,11 +74,11 @@ def main():
                         f.write(
                             f"      譜面類型：{sheet['Type']} 難度：{sheet['Difficulty']} "
                             f"等級：{sheet['Level']} 物量當量：{round(i * 10) / 10} "
-                            f"BREAK 當量：{round(j * 100) / 100}"
+                            f"BREAK 當量：{round(j * 100) / 100}\n"
                         )
                         f.write(
                             f"      TAP: {sheet['TAP']} HOLD: {sheet['HOLD']} "
-                            f"SLIDE: {sheet['SLIDE']} TOUCH: {sheet['TOUCH']} BREAK: {sheet['BREAK']}"
+                            f"SLIDE: {sheet['SLIDE']} TOUCH: {sheet['TOUCH']} BREAK: {sheet['BREAK']}\n"
                         )
 
                         if filter_enabled:  # avoid printing too many lines
