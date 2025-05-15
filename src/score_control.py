@@ -30,7 +30,6 @@ def main():
         goal = float(input("輸入目標分數 (xx.xxxx)："))
         if (goal < 0.0) or (goal > 101.0):
             raise ValueError
-        goal *= 0.01
     except ValueError:
         print("格式或數值範圍錯誤")
         return
@@ -43,18 +42,18 @@ def main():
             if filter_enabled:
                 if sheet["Version"] not in include_version or sheet["Version"] in exclude_version:
                     continue
-                if sheet["Category"] not in category:
+                if category and sheet["Category"] not in category:
                     continue
-                if sheet["Difficulty"] not in difficulty:
+                if difficulty and sheet["Difficulty"] not in difficulty:
                     continue
-                if sheet["Level"] not in level:
+                if level and sheet["Level"] not in level:
                     continue
 
             bk = int(sheet["BREAK"])
             mag = int(sheet["Magnitude"])
             score_per_note = 100.0 / mag
             bonus_score_per_bk = 1.0 / bk
-            requirement = mag * goal
+            requirement = mag * goal * 0.01
 
             # normal score
             for i in (x * 0.1 for x in range(0, int(requirement * 10), 1)):
@@ -63,7 +62,9 @@ def main():
                     if j * 5 > i or j > bk:
                         break
                     score = i * score_per_note + j * bonus_score_per_bk
-                    if 11.4514 <= score <= 11.4515 and (j >= 0.75 or j == 0.0):
+                    if goal <= score < goal + 0.0001 and (
+                        j >= 3 or j == 2.25 or j == 1.5 or j == 0.75 or j == 0.0
+                    ):
                         count += 1
                         # write to file
                         f.write(
