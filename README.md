@@ -16,6 +16,13 @@ git clone https://github.com/JHTNT/maimai-score-control-tool.git
 pip install -r requirements.txt
 ```
 
+> [!Note]
+> 若只想直接使用，沒有更新譜面資料的需求，只需下載 `python-dotenv` 即可：
+>
+> ```bash
+> pip install python-dotenv
+> ```
+
 ## Usage
 
 ### 獲取譜面資訊
@@ -36,7 +43,7 @@ python src/fetch_sheets.py
 python src/score_control.py
 ```
 
-執行後會將**所有**可以達到指定分數的組合存到 `result.txt`。由於可能的組合會有上千種，建議使用篩選功能來縮小範圍。
+輸入想要控制的分數後，會將**所有**可以達到指定分數的組合存到 `result.txt`。由於組合可能會有上千種，建議使用篩選功能來縮小範圍。
 
 ### 篩選功能
 
@@ -69,13 +76,11 @@ python src/score_control.py
 
 ```
 FILTER=True
-# 需輸入完整的版本名稱
 INCLUDE_VERSION=UNiVERSE PLUS
 EXCLUDE_VERSION=
-# Difficulty: BASIC, ADVANCED, EXPERT, MASTER, Re:MASTER
-CATEGORY=東方Project,maimai
+CATEGORY=maimai
 DIFFICULTY=MASTER
-LEVEL=12+,13
+LEVEL=13
 ```
 
 執行結果：
@@ -83,16 +88,13 @@ LEVEL=12+,13
 ```bash
 $ python src/score_control.py 
 輸入目標分數 (xx.xxxx)：12.3456
-4651. 曲名：パーフェクション 分類：maimai 版本：UNiVERSE PLUS
-      譜面類型：DX 難度：MASTER 等級：13 物量當量：134.5 BREAK 當量：26.75
+4677. 曲名：デーモンベット 分類：maimai 版本：UNiVERSE PLUS
+      譜面類型：DX 難度：MASTER 等級：13 物量當量：116.5 BREAK 當量：5.0
+      TAP: 484 HOLD: 36 SLIDE: 110 TOUCH: 23 BREAK: 13
+4681. 曲名：パーフェクション 分類：maimai 版本：UNiVERSE PLUS
+      譜面類型：DX 難度：MASTER 等級：13 物量當量：154.9 BREAK 當量：3.0
       TAP: 560 HOLD: 58 SLIDE: 118 TOUCH: 69 BREAK: 33
-4743. 曲名：大輪の魂 (feat. AO, 司芭扶) 分類：東方Project 版本：UNiVERSE PLUS
-      譜面類型：DX 難度：MASTER 等級：13 物量當量：115.4 BREAK 當量：18.25
-      TAP: 550 HOLD: 52 SLIDE: 103 TOUCH: 42 BREAK: 19
-4743. 曲名：大輪の魂 (feat. AO, 司芭扶) 分類：東方Project 版本：UNiVERSE PLUS
-      譜面類型：DX 難度：MASTER 等級：13 物量當量：120.9 BREAK 當量：8.75
-      TAP: 550 HOLD: 52 SLIDE: 103 TOUCH: 42 BREAK: 19
-能達到目標分數的組合數：3
+能達到目標分數的組合數：2
 ```
 
 若結果有多個相同編號的譜面，表示該譜面有多種判定組合可以達到目標分數。
