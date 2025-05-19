@@ -10,12 +10,8 @@ def main():
     # load filter settings
     try:
         filter_enabled = os.getenv("FILTER", "False") == "True"
-        include_version = os.getenv("INCLUDE_VERSION", "").split(",")
+        include_version = os.getenv("VERSION", "").split(",")
         include_version = [] if include_version == [""] else include_version
-        if include_version:
-            exclude_version = []
-        else:
-            exclude_version = os.getenv("EXCLUDE_VERSION", "").split(",")
         category = os.getenv("CATEGORY", "").split(",")
         category = [] if category == [""] else category
         difficulty = os.getenv("DIFFICULTY", "").split(",")
@@ -40,7 +36,7 @@ def main():
     with open("result.txt", "w", encoding="utf-8") as f:
         for sheet in reader:
             if filter_enabled:
-                if sheet["Version"] not in include_version or sheet["Version"] in exclude_version:
+                if include_version and sheet["Version"] not in include_version:
                     continue
                 if category and sheet["Category"] not in category:
                     continue
