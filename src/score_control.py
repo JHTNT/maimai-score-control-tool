@@ -49,13 +49,13 @@ def main():
             mag = int(sheet["Magnitude"])
             score_per_note = 100.0 / mag
             bonus_score_per_bk = 1.0 / bk
-            requirement = mag * goal * 0.01
+            requirement = min(mag * goal * 0.01, mag)
 
             # normal score
-            for i in (x * 0.1 for x in range(0, int(requirement * 10), 1)):
+            for i in (x * 0.1 for x in range(0, int(requirement * 10 + 1), 1)):
                 # bonus score
                 for j in (x * 0.01 for x in range(0, int(max(i, bk) * 100), 25)):
-                    if j * 5 > i or j > bk:
+                    if j * 5 >= i or j > bk:
                         break
                     score = i * score_per_note + j * bonus_score_per_bk
                     if goal <= score < goal + 0.0001 and (
